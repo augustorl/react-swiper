@@ -109,8 +109,14 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                     swiperRef.current.addEventListener('transitionend', transition)
                     if(currentIndexDRef.current == swiperRef.current.children.length - 1){
                         currentIndexDRef.current = 0
+                        
+                        if(provider.rerender)
+                        provider.setCurrentIndex(0)
                     } else if (currentIndexDRef.current != null){
                         currentIndexDRef.current += 1
+                        
+                        if(provider.rerender)
+                        provider.setCurrentIndex(currentIndexDRef.current)
                     }
 
                 } else if (translateOffset + (childWidth + widthOffset) > (childWidth + widthOffset) / offsetPresition) {
@@ -127,8 +133,14 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                     swiperRef.current.addEventListener('transitionend', transition)
                     if(currentIndexDRef.current == 0){
                         currentIndexDRef.current = swiperRef.current.children.length - 1
+                        
+                        if(provider.rerender)
+                        provider.setCurrentIndex(swiperRef.current.children.length - 1)
                     } else if (currentIndexDRef.current != null){
                         currentIndexDRef.current -= 1
+                        
+                        if(provider.rerender)
+                        provider.setCurrentIndex(currentIndexDRef.current)
                     }
                 } else {
                     //Stay in the current slide

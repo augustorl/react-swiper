@@ -7,7 +7,9 @@ export type Provider = {
     transitionEndedRef: MutableRefObject<boolean | null>,
     transitionTime: number,
     widthOffset: number,
+    rerender: boolean,
 
     handleNext: ()=> void,
     setInView: (inView: boolean)=> void,
+    setCurrentIndex: (currentIndex: number)=> void,
 }

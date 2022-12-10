@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Provider } from './types'
 
-export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0) => {
+export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0, rerender: boolean = true) => {
     
     const swiperRef = useRef<HTMLDivElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
@@ -10,6 +10,7 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
     const transitionEndedRef = useRef<boolean>(true)
 
     const [inView, setInView] = useState<boolean>(false)
+    const [currentIndex, setCurrentIndex] = useState<number | string>(rerender ? 0 : "You need to set the rerender variable to true")
 
     const handleNext = ()=>{
 
@@ -35,8 +36,14 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
 
                     if(currentIndexDRef.current == swiperRef.current.children.length - 1){
                         currentIndexDRef.current = 0
+
+                        if(rerender)
+                        setCurrentIndex(0)
                     } else {
                         currentIndexDRef.current += 1
+
+                        if(rerender)
+                        setCurrentIndex(prev => (prev as number) + 1)
                     }
                     transitionEndedRef.current = true
                 }
@@ -81,8 +88,14 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
 
             if(currentIndexDRef.current == 0){
                 currentIndexDRef.current = swiperRef.current.children.length - 1
+
+                if(rerender)
+                setCurrentIndex(swiperRef.current.children.length - 1)
             } else {
                 currentIndexDRef.current -= 1
+                
+                if(rerender)
+                setCurrentIndex(prev => (prev as number) - 1)
             }
         }
         
@@ -117,6 +130,9 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
 
                         swiperRef.current.removeEventListener('transitionend', transition)
                         currentIndexDRef.current = index
+                        
+                        if(rerender)
+                        setCurrentIndex(index)
                         transitionEndedRef.current = true
                     }
                 }
@@ -151,6 +167,9 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
                     }
                 },0)
                 currentIndexDRef.current = index
+                
+                if(rerender)
+                setCurrentIndex(index)
             }
         }
 
@@ -207,9 +226,11 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0)
         transitionEndedRef,
         transitionTime,
         widthOffset,
+        rerender,
         handleNext,
-        setInView
+        setInView,
+        setCurrentIndex
     }
 
-  return { provider, handleNext, handlePrev, handleGoTo, autoStart, autoStop, inView, currentIndexDRef }
+  return { provider, handleNext, handlePrev, handleGoTo, autoStart, autoStop, inView, currentIndex }
 }
