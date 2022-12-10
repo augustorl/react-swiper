@@ -10,7 +10,7 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0,
     const transitionEndedRef = useRef<boolean>(true)
 
     const [inView, setInView] = useState<boolean>(false)
-    const [currentIndex, setCurrentIndex] = useState<number | string>(rerender ? 0 : "You need to set the rerender variable to true")
+    const [currentIndex, setCurrentIndex] = useState<number>(0)
 
     const handleNext = ()=>{
 
@@ -43,7 +43,7 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0,
                         currentIndexDRef.current += 1
 
                         if(rerender)
-                        setCurrentIndex(prev => (prev as number) + 1)
+                        setCurrentIndex(prev => prev + 1)
                     }
                     transitionEndedRef.current = true
                 }
@@ -95,7 +95,7 @@ export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0,
                 currentIndexDRef.current -= 1
                 
                 if(rerender)
-                setCurrentIndex(prev => (prev as number) - 1)
+                setCurrentIndex(prev => prev - 1)
             }
         }
         
