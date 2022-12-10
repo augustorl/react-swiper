@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Provider } from './types'
 
-export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0) => {
+export const useSwiper = (transitionTime: number = 300, widthOffset: number = 0) => {
     
     const swiperRef = useRef<HTMLDivElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
@@ -23,7 +23,7 @@ export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0
 
             const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
 
-            swiperRef.current.style.transform = `translateX(-${(childWidth + marginOffset)}px)`
+            swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset)}px)`
 
             const transition = ()=>{
                 if(swiperRef.current){
@@ -61,7 +61,7 @@ export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0
             swiperRef.current.insertBefore(lastChild, swiperRef.current.firstChild)
 
             swiperRef.current.style.transition = 'none'
-            swiperRef.current.style.transform = `translateX(-${(childWidth + marginOffset)}px)`
+            swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset)}px)`
 
             setTimeout(()=>{
                 if(swiperRef.current){
@@ -104,7 +104,7 @@ export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0
 
                 const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
 
-                swiperRef.current.style.transform = `translateX(-${(childWidth + marginOffset) * (IndexDif)}px)`
+                swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * (IndexDif)}px)`
 
                 const transition = ()=>{
                     if(swiperRef.current){
@@ -141,7 +141,7 @@ export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0
                 }
 
                 swiperRef.current.style.transition = 'none'
-                swiperRef.current.style.transform = `translateX(-${(childWidth + marginOffset) * IndexDif}px)`
+                swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * IndexDif}px)`
 
                 setTimeout(()=>{
                     if(swiperRef.current){
@@ -206,7 +206,7 @@ export const useSwiper = (transitionTime: number = 300, marginOffset: number = 0
         currentIndexDRef,
         transitionEndedRef,
         transitionTime,
-        marginOffset,
+        widthOffset,
         handleNext,
         setInView
     }

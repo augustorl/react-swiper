@@ -20,7 +20,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
     const containerRef = provider.containerRef
     const currentIndexDRef = provider.currentIndexDRef
     const transitionEndedRef = provider.transitionEndedRef
-    const marginOffset: number = provider.marginOffset
+    const widthOffset: number = provider.widthOffset
 
     function getTranslateX(myElement: HTMLDivElement) {
         const style = window.getComputedStyle(myElement)
@@ -62,10 +62,10 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
               const currentTranslateX = - getTranslateX(swiperRef.current)
             
               //prevent white space when going to far to the left else will move the slider while dragging
-              if(currentTranslateX <= 0 || currentTranslateX >  (childWidth + marginOffset) * 2){
+              if(currentTranslateX <= 0 || currentTranslateX >  (childWidth + widthOffset) * 2){
                 return
               } else {
-                swiperRef.current.style.transform = `translateX(${-posX2 - (childWidth + marginOffset)}px)`;
+                swiperRef.current.style.transform = `translateX(${-posX2 - (childWidth + widthOffset)}px)`;
               }
             }
         }
@@ -82,17 +82,17 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                 const translateOffset = getTranslateX(swiperRef.current)
 
                 const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
-                if (translateOffset + (childWidth + marginOffset) < -1 * (childWidth + marginOffset) / offsetPresition && swiperRef.current && swiperRef.current.children.length > 0) {
+                if (translateOffset + (childWidth + widthOffset) < -1 * (childWidth + widthOffset) / offsetPresition && swiperRef.current && swiperRef.current.children.length > 0) {
                     //Go to Next slide
 
-                    swiperRef.current.style.transform = `translateX(${-(childWidth + marginOffset)}px)`
+                    swiperRef.current.style.transform = `translateX(${-(childWidth + widthOffset)}px)`
             
                     const firstChild = swiperRef.current.children[0]
                     const secondtChild = swiperRef.current.children[1]
             
                     swiperRef.current.style.transition = `all ${transitionTime}ms ease-out`
             
-                    swiperRef.current.style.transform = `translateX(${-(childWidth + marginOffset) * 2}px)`
+                    swiperRef.current.style.transform = `translateX(${-(childWidth + widthOffset) * 2}px)`
             
                     const transition = ()=>{
                         if(swiperRef.current){
@@ -113,7 +113,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                         currentIndexDRef.current += 1
                     }
 
-                } else if (translateOffset + (childWidth + marginOffset) > (childWidth + marginOffset) / offsetPresition) {
+                } else if (translateOffset + (childWidth + widthOffset) > (childWidth + widthOffset) / offsetPresition) {
                     //Go to Prev slide
                     swiperRef.current.style.transition = `all ${transitionTime}ms ease-out`
                     swiperRef.current.style.transform = `translateX(0px)`
@@ -144,14 +144,14 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                         }
                     }
                     //transition doesn't work if distance is 0 so:
-                    if(translateOffset + (childWidth + marginOffset) == 0){
+                    if(translateOffset + (childWidth + widthOffset) == 0){
                         const firstChild = swiperRef.current.children[0]
                         swiperRef.current.style.transform = `translateX(0px)`
                         swiperRef.current.appendChild(firstChild)
                         transitionEndedRef.current = true
                     } else {
                         swiperRef.current.style.transition = `all ${transitionTime}ms ease-out`
-                        swiperRef.current.style.transform = `translateX(${-(childWidth + marginOffset)}px)`
+                        swiperRef.current.style.transform = `translateX(${-(childWidth + widthOffset)}px)`
                         swiperRef.current.addEventListener('transitionend', transition)
                     }
                 }
@@ -178,7 +178,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                 swiperRef.current.insertBefore(lastChild, swiperRef.current.firstChild)
 
                 swiperRef.current.style.transition = 'none'
-                swiperRef.current.style.transform = `translateX(${-childWidth}px)`
+                swiperRef.current.style.transform = `translateX(${-(childWidth + widthOffset)}px)`
                 //
 
                 if (e.type == "touchstart") {
