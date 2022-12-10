@@ -8,17 +8,21 @@
 
 Install npm package 
 
-`npm i @glitch-txs/react-swiper`
+```bash
+npm i @glitch-txs/react-swiper
+```
 
 import *Swiper* component and *useSwiper* hook:
 
-`import { Swiper, useSwiper } from '@glitch/react-swiper'`
+```tsx
+import { Swiper, useSwiper } from '@glitch/react-swiper'
+```
 
 Set up the swiper, you will need to pass CSS classes to the swiper to be able to have full control on styling (wrapperClass and containerClass).
 
 Here I'm using CSS modules:
 
-```
+```tsx
 export default function YourComponent() {
 
   const { provider, handleNext, handlePrev } = useSwiper()
@@ -47,7 +51,7 @@ export default function YourComponent() {
 
 ## Adding auto-slide:
 
-```
+```tsx
   const { provider, handleNext, handlePrev, handleGoTo, autoStart, autoStop, inView } = useSwiper()
 
   useEffect(()=>{
@@ -73,7 +77,7 @@ export default function YourComponent() {
 The Swiper component is built with two HTML Div's. One is the window (it will have overflow: hidden, so you will only see through it) that will wrap everything. 
 And the child div that will be the container for all your slides, this one will be hidden by the most part.
 
-```
+```css
 .wrapperClass{
     /* the width and height must be equal to each slide individuly including their margins */
     width: 100%;
@@ -98,6 +102,15 @@ And the child div that will be the container for all your slides, this one will 
     z-index: 10;
 }
 ```
+
+# useSwiper arguments
+
+useSwiper hook takes three args, if you wish to pass one of them you will MUST add them all IN ORDER.
+
+Arguments:
+rerender: default = true, (This will render the whole component each time the currentIndex change, you can turn this off if you're not using curentIndex variable)
+widthOffset: default = 0, ( margin of the sliders if any. E.g: margin: 0 5px 0 5px  ==> widthOffset = 10 )
+transitionTime: default = 300 (The time in miliseconds it takes to slide)
 
 Check GitHub examples for more information.
 
