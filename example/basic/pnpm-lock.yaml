@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@glitch-txs/react-swiper': ^0.1.0
   '@types/node': 18.11.12
   '@types/react': 18.0.26
   '@types/react-dom': 18.0.9
@@ -10,6 +11,7 @@ specifiers:
   typescript: 4.9.4
 
 dependencies:
+  '@glitch-txs/react-swiper': 0.1.0_react@18.2.0
   '@types/node': 18.11.12
   '@types/react': 18.0.26
   '@types/react-dom': 18.0.9
@@ -19,6 +21,15 @@ dependencies:
   typescript: 4.9.4
 
 packages:
+
+  /@glitch-txs/react-swiper/0.1.0_react@18.2.0:
+    resolution: {integrity: sha512-igNCNOiIAb2HeScDDpiYaQxTZEqSKVkTh586AGaqRY1HZRNhw719nGdj5tRnSUa5oTYfK6IfjPC1b/eMEpVOIA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@next/env/13.0.6:
     resolution: {integrity: sha512-yceT6DCHKqPRS1cAm8DHvDvK74DLIkDQdm5iV+GnIts8h0QbdHvkUIkdOvQoOODgpr6018skbmSQp12z5OWIQQ==}

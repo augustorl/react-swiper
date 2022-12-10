@@ -33,7 +33,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@glitch/react-swiper",
+  "name": "@glitch-txs/react-swiper",
   "author": "Glitch",
   "module": "dist/react-swiper.esm.js",
   "repository": {
