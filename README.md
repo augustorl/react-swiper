@@ -95,7 +95,7 @@ And the child div that will be the container for all your slides, this one will 
     /* Width is calculated multiplying the full width of the parent container by the number of slider elements inside the swiper,
     this way THIS container will take the width of the sum of all children elements. Width: calc(100% * numberOfCards) */
 
-    /* Here the number for is because I'm using 4 cards */
+    /* Here there's number four because I'm using 4 cards */
     width: calc(100% * 4);
     height: 100%;
 
@@ -103,16 +103,19 @@ And the child div that will be the container for all your slides, this one will 
 }
 ```
 
-# useSwiper arguments
+# useSwiper arguments (Not Mandatory)
 
-useSwiper hook takes three args, if you wish to pass one of them you will MUST add them all IN ORDER.
+useSwiper hook takes three args but they are NOT mandatory, if you wish to pass one of them you will MUST add them all IN ORDER.
 
 Arguments:
-rerender: default = true, (This will render the whole component each time the currentIndex change, you can turn this off if you're not using curentIndex variable)
-widthOffset: default = 0, ( margin of the sliders if any. E.g: margin: 0 5px 0 5px  ==> widthOffset = 10 )
-transitionTime: default = 300 (The time in miliseconds it takes to slide)
+
+`rerender: default = true`, (This will render the whole component each time the currentIndex changes, you can turn this off if you're not using curentIndex variable)
+
+`widthOffset: default = 0`, ( margin of the sliders if any. E.g: `margin: 0 5px 0 5px`  ==> `widthOffset = 10` )
+
+`transitionTime: default = 300` (The time in miliseconds it takes to slide)
+
 
 Check GitHub examples for more information.
-
 
 

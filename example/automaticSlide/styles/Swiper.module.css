@@ -15,7 +15,7 @@
 
     /* Width is calculated multiplying the full width of the parent container by the number of slider elements inside the swiper,
     this way THIS container will take the width of the sum of all children elements. Width: calc(100% * numberOfCards) */
-    /* Here the number for is because I'm using 4 cards */
+   /* Here there's number four because I'm using 4 cards */
     width: calc(100% * 4);
     height: 100%;
 
