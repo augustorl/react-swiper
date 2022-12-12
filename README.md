@@ -4,6 +4,8 @@
 2. import useSwiper hook
 3. setup CSS files for the swiper component
 
+[NPM URL](https://www.npmjs.com/package/@glitch-txs/react-swiper)
+
 ## How to use:
 
 Install npm package 
@@ -15,7 +17,7 @@ npm i @glitch-txs/react-swiper
 import *Swiper* component and *useSwiper* hook:
 
 ```tsx
-import { Swiper, useSwiper } from '@glitch/react-swiper'
+import { Swiper, useSwiper } from '@glitch-txs/react-swiper'
 ```
 
 Set up the swiper, you will need to pass CSS classes to the swiper to be able to have full control on styling (wrapperClass and containerClass).
