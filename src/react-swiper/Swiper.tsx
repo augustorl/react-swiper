@@ -59,7 +59,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                 posX2 = posX1 - e.clientX;
               }
 
-              const currentTranslateX = - getTranslateX(swiperRef.current)
+              const currentTranslateX = - Number(getTranslateX(swiperRef.current).toFixed(2))
             
               //prevent white space when going to far to the left else will move the slider while dragging
               if(currentTranslateX <= 0 || currentTranslateX >  (childWidth + widthOffset) * 2){
@@ -79,7 +79,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                     }
                 }
 
-                const translateOffset = getTranslateX(swiperRef.current)
+                const translateOffset = Number(getTranslateX(swiperRef.current).toFixed(2))
 
                 const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
                 if (translateOffset + (childWidth + widthOffset) < -1 * (childWidth + widthOffset) / offsetPresition && swiperRef.current && swiperRef.current.children.length > 0) {
