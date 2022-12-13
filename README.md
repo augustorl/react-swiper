@@ -105,6 +105,21 @@ And the child div that will be the container for all your slides, this one will 
 }
 ```
 
+## Progress Points/bars
+
+if you want to add a fixed component INSIDE the swiper you can pass a JSX variable to the component as *progress*
+
+## Hooks functions and variables
+
+- provider
+- handleNext
+- handlePrev
+- handleGoTo
+- autoStart
+- autoStop
+- inView
+- currentIndex
+
 # useSwiper arguments (Not Mandatory)
 
 useSwiper hook takes three args but they are NOT mandatory, if you wish to pass one of them you will MUST add them all IN ORDER.

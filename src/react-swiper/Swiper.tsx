@@ -6,10 +6,11 @@ type Props = {
     children: React.ReactNode,
     wrapperClass: string,
     containerClass: string,
-    clickable?: boolean
+    clickable?: boolean,
+    progress?: JSX.Element
 }
 
-export const Swiper = ({ provider, children, wrapperClass, containerClass, clickable = false }: Props) => {
+export const Swiper = ({ provider, children, wrapperClass, containerClass, clickable = false, progress = (<></>) }: Props) => {
     
     const transitionTime: number = provider.transitionTime
 
@@ -245,6 +246,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
             { children }
 
             </div>
+            { progress }
         </div>
 
     </>
