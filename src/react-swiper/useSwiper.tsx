@@ -194,6 +194,8 @@ export const useSwiper = (rerender: boolean = true, widthOffset: number = 0, tra
         window.addEventListener('focus', ()=>{
             if(intervalIDRef.current)
             clearInterval(intervalIDRef.current)
+
+            provider.handleNext()
             intervalIDRef.current = setInterval(()=>{
                 provider.handleNext()
             }, animationTime)
@@ -213,6 +215,8 @@ export const useSwiper = (rerender: boolean = true, widthOffset: number = 0, tra
         window.removeEventListener('focus', ()=>{
             if(intervalIDRef.current)
             clearInterval(intervalIDRef.current)
+            
+            provider.handleNext()
             intervalIDRef.current = setInterval(()=>{
                 provider.handleNext()
             }, animationTime)
