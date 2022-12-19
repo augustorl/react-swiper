@@ -241,7 +241,10 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
     <>
         <div className={wrapperClass} ref={containerRef}>
 
-            <div className={containerClass} ref={swiperRef}>
+            <div 
+            className={containerClass} 
+            ref={swiperRef}
+            style={ provider.async && swiperRef.current ? { width:`calc( 100% * ${swiperRef.current.children.length})` } : { } } >
 
             { children }
 

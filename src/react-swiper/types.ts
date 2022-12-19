@@ -8,6 +8,7 @@ export type Provider = {
     transitionTime: number,
     widthOffset: number,
     rerender: boolean,
+    async: boolean,
 
     handleNext: ()=> void,
     setInView: (inView: boolean)=> void,

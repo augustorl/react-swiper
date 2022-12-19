@@ -122,15 +122,50 @@ if you want to add a fixed component INSIDE the swiper you can pass a JSX variab
 
 # useSwiper arguments (Not Mandatory)
 
-useSwiper hook takes three args but they are NOT mandatory, if you wish to pass one of them you will MUST add them all IN ORDER.
-
-Arguments:
+useSwiper hook takes an object as arguments with the following vaiables:
 
 `rerender: default = true`, (This will render the whole component each time the currentIndex changes, you can turn this off if you're not using curentIndex variable)
 
 `widthOffset: default = 0`, ( margin of the sliders if any. E.g: `margin: 0 5px 0 5px`  ==> `widthOffset = 10` )
 
 `transitionTime: default = 300` (The time in miliseconds it takes to slide)
+
+`async: default = false` (if contenct is async set this to true and add a conditional for the Swipper component to render, you won't need to add width to the containerClass in this case.)
+
+example:
+
+
+```tsx
+export default function YourComponent() {
+
+  const { provider } = useSwiper({ async: true })
+
+  const [isData, setIsData] = useState<boolean>(false)
+
+  useEffect(()=>{
+    setIsData(true)
+  },[isData])
+
+  
+  return (
+
+    {
+      isData && <Swiper provider={provider} wrapperClass={s.container} containerClass={s.slideContainer}>
+
+        { data?.map((item, index)=>(
+            <div key={index} className={s.slide}>
+
+                Content Here
+
+            </div>
+        ))}
+
+      </Swiper>
+    }
+
+  )
+}
+```
 
 
 Check GitHub examples for more information.

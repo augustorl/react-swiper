@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Provider } from './types'
 
-export const useSwiper = (rerender: boolean = true, widthOffset: number = 0, transitionTime: number = 300 ) => {
+export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 300, async = false} = {} ) => {
     
     const swiperRef = useRef<HTMLDivElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
@@ -231,6 +231,7 @@ export const useSwiper = (rerender: boolean = true, widthOffset: number = 0, tra
         transitionTime,
         widthOffset,
         rerender,
+        async,
         handleNext,
         setInView,
         setCurrentIndex
