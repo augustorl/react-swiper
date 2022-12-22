@@ -50,6 +50,19 @@ export default function YourComponent() {
 
     </div>    
 ```
+## Clickable
+
+If you want to have clickable components inside the swiper use the prop `clickable`.
+
+If you are using images remember to add the prop `draggable={false}`
+
+```tsx
+        <Swiper provider={provider} clickable wrapperClass={styles.wrapperClass} containerClass={styles.containerClass}>
+
+          <Image src='mySrc' draggable={false} alt='myImg' />
+
+        </Swiper>
+```
 
 ## Adding auto-slide:
 
@@ -58,18 +71,16 @@ export default function YourComponent() {
 
   useEffect(()=>{
 
-    let animationTime = anyNumber
-
     //the auto-slide will only be active when the component is in view.
     if(inView){
       //the argument taken by autoStart is the time in miliseconds for each slide. 
-      autoStart(animationTime)
+      autoStart()
     } else {
-      autoStop(animationTime)
+      autoStop()
     }
 
     //autoStart uses eventListeners so we need to pass the same params used when returning.
-    return ()=> autoStop(animationTime)
+    return ()=> autoStop()
 
   },[inView])
 ```
@@ -129,6 +140,8 @@ useSwiper hook takes an object as arguments with the following vaiables:
 `widthOffset: default = 0`, ( margin of the sliders if any. E.g: `margin: 0 5px 0 5px`  ==> `widthOffset = 10` )
 
 `transitionTime: default = 300` (The time in miliseconds it takes to slide)
+
+`animationTime: default = 4000` (The time in miliseconds it will automatically move to the next slide)
 
 `async: default = false` (if contenct is async set this to true and add a conditional for the Swipper component to render, you won't need to add width to the containerClass in this case.)
 
