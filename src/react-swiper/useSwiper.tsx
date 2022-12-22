@@ -142,8 +142,6 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
 
     const handleGoTo = (index: number)=>{
 
-        console.log(transitionEndedRef.current)
-
         if(currentIndexDRef.current == index && transitionEndedRef.current){
             //we'll restart the counter for the autoslide
             if(intervalIDRef.current && isAutoSlideRef){
@@ -263,7 +261,6 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
         isAutoSlideRef.current = true
 
         intervalIDRef.current = setInterval(handleStartInterval, animationTime)
-        console.log('start',intervalIDRef.current)
         
         //This will stop the animation if the window get blur to stop the animation when the user is not in the website. (Avoids Bugs).
         window.addEventListener('blur', handleClearInterval)
