@@ -9,6 +9,9 @@ export type Provider = {
     widthOffset: number,
     rerender: boolean,
     async: boolean,
+    intervalIDRef: MutableRefObject<NodeJS.Timer | null>,
+    isAutoSlideRef: MutableRefObject<boolean>,
+    animationTime: number,
 
     handleNext: ()=> void,
     setInView: (inView: boolean)=> void,

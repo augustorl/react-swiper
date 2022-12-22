@@ -166,8 +166,8 @@ export default function YourComponent() {
   )
 }
 ```
+All functions must be disabled until the content is loaded.
 
-
-Check GitHub examples for more information.
+GitHub examples are currently outdated.
 
 

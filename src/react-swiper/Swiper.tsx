@@ -23,6 +23,8 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
     const transitionEndedRef = provider.transitionEndedRef
     const widthOffset: number = provider.widthOffset
 
+
+
     function getTranslateX(myElement: HTMLDivElement) {
         const style = window.getComputedStyle(myElement)
         const matrix = new WebKitCSSMatrix(style.transform)
@@ -101,6 +103,12 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                             swiperRef.current.style.transform = `translateX(0px)`
                             swiperRef.current.appendChild(firstChild)
                             swiperRef.current.appendChild(secondtChild)
+
+                            if(provider.isAutoSlideRef){
+                                provider.intervalIDRef.current = setInterval(()=>{
+                                    provider.handleNext()
+                                }, provider.animationTime)
+                            }
             
                             transitionEndedRef.current = true
                             swiperRef.current.removeEventListener('transitionend', transition)
@@ -126,6 +134,13 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                     swiperRef.current.style.transform = `translateX(0px)`
                     const transition = ()=>{
                         if(swiperRef.current){
+
+                            if(provider.isAutoSlideRef){
+                                provider.intervalIDRef.current = setInterval(()=>{
+                                    provider.handleNext()
+                                }, provider.animationTime)
+                            }
+
                             transitionEndedRef.current = true
                             swiperRef.current.removeEventListener('transitionend', transition)
                         }
@@ -151,6 +166,12 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                             swiperRef.current.style.transition = `none`
                             swiperRef.current.style.transform = `translateX(0px)`
                             swiperRef.current.appendChild(firstChild)
+
+                            if(provider.isAutoSlideRef){
+                                provider.intervalIDRef.current = setInterval(()=>{
+                                    provider.handleNext()
+                                }, provider.animationTime)
+                            }
             
                             transitionEndedRef.current = true
                             swiperRef.current.removeEventListener('transitionend', transition)
@@ -161,6 +182,13 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                         const firstChild = swiperRef.current.children[0]
                         swiperRef.current.style.transform = `translateX(0px)`
                         swiperRef.current.appendChild(firstChild)
+
+                        if(provider.isAutoSlideRef){
+                            provider.intervalIDRef.current = setInterval(()=>{
+                                provider.handleNext()
+                            }, provider.animationTime)
+                        }
+                        
                         transitionEndedRef.current = true
                     } else {
                         swiperRef.current.style.transition = `all ${transitionTime}ms ease-out`
@@ -178,7 +206,14 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
         }
 
         function dragStart(e:any) {
+
             if(containerRef.current && swiperRef.current && transitionEndedRef.current){
+                
+                //we'll restart the counter for the autoslide
+                if(provider.intervalIDRef.current && provider.isAutoSlideRef){
+                    clearInterval(provider.intervalIDRef.current)
+                }
+
                 transitionEndedRef.current = false
                 swiperRef.current.style.transition = 'none'
 
