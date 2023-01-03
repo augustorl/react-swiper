@@ -104,7 +104,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                             swiperRef.current.appendChild(firstChild)
                             swiperRef.current.appendChild(secondtChild)
 
-                            if(provider.isAutoSlideRef){
+                            if(provider.isAutoSlideRef.current){
                                 provider.intervalIDRef.current = setInterval(()=>{
                                     provider.handleNext()
                                 }, provider.animationTime)
@@ -135,7 +135,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                     const transition = ()=>{
                         if(swiperRef.current){
 
-                            if(provider.isAutoSlideRef){
+                            if(provider.isAutoSlideRef.current){
                                 provider.intervalIDRef.current = setInterval(()=>{
                                     provider.handleNext()
                                 }, provider.animationTime)
@@ -167,7 +167,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                             swiperRef.current.style.transform = `translateX(0px)`
                             swiperRef.current.appendChild(firstChild)
 
-                            if(provider.isAutoSlideRef){
+                            if(provider.isAutoSlideRef.current){
                                 provider.intervalIDRef.current = setInterval(()=>{
                                     provider.handleNext()
                                 }, provider.animationTime)
@@ -183,7 +183,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                         swiperRef.current.style.transform = `translateX(0px)`
                         swiperRef.current.appendChild(firstChild)
 
-                        if(provider.isAutoSlideRef){
+                        if(provider.isAutoSlideRef.current){
                             provider.intervalIDRef.current = setInterval(()=>{
                                 provider.handleNext()
                             }, provider.animationTime)
@@ -210,7 +210,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
             if(containerRef.current && swiperRef.current && transitionEndedRef.current){
                 
                 //we'll restart the counter for the autoslide
-                if(provider.intervalIDRef.current && provider.isAutoSlideRef){
+                if(provider.intervalIDRef.current && provider.isAutoSlideRef.current){
                     clearInterval(provider.intervalIDRef.current)
                 }
 

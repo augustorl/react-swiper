@@ -33,7 +33,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
         if(swiperRef.current && swiperRef.current.children.length > 0 && transitionEndedRef.current){
 
             //we'll restart the counter for the autoslide
-            if(intervalIDRef.current && isAutoSlideRef){
+            if(intervalIDRef.current && isAutoSlideRef.current){
                 clearInterval(intervalIDRef.current)
             }
             
@@ -67,7 +67,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
                         setCurrentIndex(prev => prev + 1)
                     }
 
-                    if(isAutoSlideRef){
+                    if(isAutoSlideRef.current){
                         intervalIDRef.current = setInterval(()=>{
                             handleNext()
                         }, animationTime)
@@ -86,7 +86,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
         if(swiperRef.current && swiperRef.current.children.length > 0 && transitionEndedRef.current){
 
             //we'll restart the counter for the autoslide
-            if(intervalIDRef.current && isAutoSlideRef){
+            if(intervalIDRef.current && isAutoSlideRef.current){
                 clearInterval(intervalIDRef.current)
             }
 
@@ -106,7 +106,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
             const transition = ()=>{
                 if(swiperRef.current){
 
-                    if(isAutoSlideRef){
+                    if(isAutoSlideRef.current){
                         intervalIDRef.current = setInterval(()=>{
                             handleNext()
                         }, animationTime)
@@ -144,7 +144,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
 
         if(currentIndexDRef.current == index && transitionEndedRef.current){
             //we'll restart the counter for the autoslide
-            if(intervalIDRef.current && isAutoSlideRef){
+            if(intervalIDRef.current && isAutoSlideRef.current){
                 transitionEndedRef.current = false
                 clearInterval(intervalIDRef.current)
 
@@ -160,7 +160,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
                 transitionEndedRef.current = false
                 
                 //we'll restart the counter for the autoslide
-                if(intervalIDRef.current && isAutoSlideRef){
+                if(intervalIDRef.current && isAutoSlideRef.current){
                     clearInterval(intervalIDRef.current)
                 }
 
@@ -187,7 +187,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
                         if(rerender)
                         setCurrentIndex(index)
 
-                        if(isAutoSlideRef){
+                        if(isAutoSlideRef.current){
                             intervalIDRef.current = setInterval(()=>{
                                 handleNext()
                             }, animationTime)
@@ -204,7 +204,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
                 transitionEndedRef.current = false
 
                 //we'll restart the counter for the autoslide
-                if(intervalIDRef.current && isAutoSlideRef){
+                if(intervalIDRef.current && isAutoSlideRef.current){
                     clearInterval(intervalIDRef.current)
                 }
 
@@ -225,7 +225,7 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
                 const transition = ()=>{
                     if(swiperRef.current){
 
-                        if(isAutoSlideRef){
+                        if(isAutoSlideRef.current){
                             intervalIDRef.current = setInterval(()=>{
                                 handleNext()
                             }, animationTime)
