@@ -7,10 +7,10 @@ type Props = {
     wrapperClass: string,
     containerClass: string,
     clickable?: boolean,
-    progress?: JSX.Element
+    length?: number
 }
 
-export const Swiper = ({ provider, children, wrapperClass, containerClass, clickable = false, progress = (<></>) }: Props) => {
+export const Swiper = ({ provider, children, wrapperClass, containerClass, clickable = false, length }: Props) => {
     
     const transitionTime: number = provider.transitionTime
 
@@ -258,7 +258,7 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
                 provider.setInView(false)
                 return
             }
-        },{ threshold: 0.6, })
+        },{ threshold: 0.6 })
 
         if(containerRef.current)
         observer.observe(containerRef.current)
@@ -279,12 +279,11 @@ export const Swiper = ({ provider, children, wrapperClass, containerClass, click
             <div 
             className={containerClass} 
             ref={swiperRef}
-            style={ provider.async && swiperRef.current ? { width:`calc( 100% * ${swiperRef.current.children.length})` } : { } } >
+            style={ provider.async ? { width:`calc( 100% * ${length})` } : { } } >
 
             { children }
 
             </div>
-            { progress }
         </div>
 
     </>
