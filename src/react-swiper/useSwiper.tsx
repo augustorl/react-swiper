@@ -252,6 +252,108 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
 
     }
 
+    const handleRestart = ()=>{
+
+        if(currentIndexDRef.current == 0 && transitionEndedRef.current){
+            //we'll restart the counter for the autoslide
+            if(intervalIDRef.current && isAutoSlideRef.current){
+                transitionEndedRef.current = false
+                clearInterval(intervalIDRef.current)
+
+                intervalIDRef.current = setInterval(()=>{
+                    handleNext()
+                }, animationTime)
+                transitionEndedRef.current = true
+            }
+            return
+        }else if(currentIndexDRef.current < 0 && transitionEndedRef.current && swiperRef.current){
+
+        //Goes fordward
+                transitionEndedRef.current = false
+                
+                //we'll restart the counter for the autoslide
+                if(intervalIDRef.current && isAutoSlideRef.current){
+                    clearInterval(intervalIDRef.current)
+                }
+
+                const IndexDif = 0 - currentIndexDRef.current
+
+                swiperRef.current.style.transition = `all 0ms ease-out`
+
+                const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
+
+                swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * (IndexDif)}px)`
+
+                const transition = ()=>{
+                    if(swiperRef.current){
+                        swiperRef.current.style.transition = `none`
+                        swiperRef.current.style.transform = `translateX(0px)`
+                        for(let i = 0; i < IndexDif; i++){
+                            const firstChild = swiperRef.current.children[0]
+                            swiperRef.current.appendChild(firstChild)
+                        }
+                        currentIndexDRef.current = 0
+                        
+                        if(rerender)
+                        setCurrentIndex(0)
+
+                        if(isAutoSlideRef.current){
+                            intervalIDRef.current = setInterval(()=>{
+                                handleNext()
+                            }, animationTime)
+                        }
+
+                        transitionEndedRef.current = true
+                    }
+                }
+
+                setTimeout(transition,0)
+
+        }else if(currentIndexDRef.current > 0 && transitionEndedRef.current && swiperRef.current){
+        //Goes backward
+                transitionEndedRef.current = false
+
+                //we'll restart the counter for the autoslide
+                if(intervalIDRef.current && isAutoSlideRef.current){
+                    clearInterval(intervalIDRef.current)
+                }
+
+                const IndexDif = currentIndexDRef.current - 0
+
+                const lastChildIndex = swiperRef.current.children.length - 1
+                
+                const childWidth = (swiperRef.current.children[0] as HTMLElement).offsetWidth
+                
+                for(let i = 0; i < IndexDif; i++){
+                    const lastChild = swiperRef.current.children[lastChildIndex]
+                    swiperRef.current.insertBefore(lastChild, swiperRef.current.firstChild)
+                }
+
+                swiperRef.current.style.transition = 'none'
+                swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * IndexDif}px)`
+
+                setTimeout(()=>{
+                    if(swiperRef.current){
+                        swiperRef.current.style.transition = `all 0ms ease-out`
+                        swiperRef.current.style.transform = `translateX(0px)`
+                        if(isAutoSlideRef.current){
+                            intervalIDRef.current = setInterval(()=>{
+                                handleNext()
+                            }, animationTime)
+                        }
+
+                        transitionEndedRef.current = true
+                    }
+                },10)
+
+                currentIndexDRef.current = 0
+                
+                if(rerender)
+                setCurrentIndex(0)
+        }
+
+    }
+
     const autoStart = ()=>{
 
         if(intervalIDRef.current){
@@ -297,5 +399,5 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
         setCurrentIndex
     }
 
-  return { provider, handleNext, handlePrev, handleGoTo, autoStart, autoStop, inView, currentIndex }
+  return { provider, handleNext, handlePrev, handleGoTo, autoStart, autoStop, handleRestart, inView, currentIndex }
 }
