@@ -284,30 +284,24 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
 
                 swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * (IndexDif)}px)`
 
-                const transition = ()=>{
-                    if(swiperRef.current){
-                        swiperRef.current.style.transition = `none`
-                        swiperRef.current.style.transform = `translateX(0px)`
-                        for(let i = 0; i < IndexDif; i++){
-                            const firstChild = swiperRef.current.children[0]
-                            swiperRef.current.appendChild(firstChild)
-                        }
-                        currentIndexDRef.current = 0
-                        
-                        if(rerender)
-                        setCurrentIndex(0)
+                swiperRef.current.style.transition = `none`
+                swiperRef.current.style.transform = `translateX(0px)`
+                for(let i = 0; i < IndexDif; i++){
+                    const firstChild = swiperRef.current.children[0]
+                    swiperRef.current.appendChild(firstChild)
+                }
+                currentIndexDRef.current = 0
+                
+                if(rerender)
+                setCurrentIndex(0)
 
-                        if(isAutoSlideRef.current){
-                            intervalIDRef.current = setInterval(()=>{
-                                handleNext()
-                            }, animationTime)
-                        }
-
-                        transitionEndedRef.current = true
-                    }
+                if(isAutoSlideRef.current){
+                    intervalIDRef.current = setInterval(()=>{
+                        handleNext()
+                    }, animationTime)
                 }
 
-                setTimeout(transition,0)
+                transitionEndedRef.current = true
 
         }else if(currentIndexDRef.current > 0 && transitionEndedRef.current && swiperRef.current){
         //Goes backward
@@ -331,20 +325,16 @@ export const useSwiper = ( {rerender = true, widthOffset = 0, transitionTime = 3
 
                 swiperRef.current.style.transition = 'none'
                 swiperRef.current.style.transform = `translateX(-${(childWidth + widthOffset) * IndexDif}px)`
+                
+                swiperRef.current.style.transition = `all 0ms ease-out`
+                swiperRef.current.style.transform = `translateX(0px)`
+                if(isAutoSlideRef.current){
+                    intervalIDRef.current = setInterval(()=>{
+                        handleNext()
+                    }, animationTime)
+                }
 
-                setTimeout(()=>{
-                    if(swiperRef.current){
-                        swiperRef.current.style.transition = `all 0ms ease-out`
-                        swiperRef.current.style.transform = `translateX(0px)`
-                        if(isAutoSlideRef.current){
-                            intervalIDRef.current = setInterval(()=>{
-                                handleNext()
-                            }, animationTime)
-                        }
-
-                        transitionEndedRef.current = true
-                    }
-                },10)
+                transitionEndedRef.current = true
 
                 currentIndexDRef.current = 0
                 
